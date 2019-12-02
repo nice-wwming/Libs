@@ -1,8 +1,8 @@
 # Libs
 **一款个人的js函数封装库**
 
-#### 使用方法
-> wwm.函数名(arguments)  ||  wwm[函数名](arguments)
+## 使用方法
+> wwm.函数名(arguments)
 
 **字符串方法**
 
