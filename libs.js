@@ -1,4 +1,4 @@
-var wwm = {
+let wwm = {
 
     /* 字符串 */
 
@@ -46,7 +46,7 @@ var wwm = {
     //result：Asdasd
     changeCase: function (str, type) {
         function ToggleCase(str) {
-            var itemText = ""
+            let itemText = ""
             str.split("").forEach(
                 function (item) {
                     if (/^([a-z]+)/.test(item)) {
@@ -91,8 +91,8 @@ var wwm = {
     //repeatStr('123',3)
     //"result：123123123"
     repeatStr: function (str, count) {
-        var text = '';
-        for (var i = 0; i < count; i++) {
+        let text = '';
+        for (let i = 0; i < count; i++) {
             text += str;
         }
         return text;
@@ -114,23 +114,23 @@ var wwm = {
         raRegExp = new RegExp(AFindText, "g");
         return str.replace(raRegExp, ARepText);
     },
-    
-   /**
-    * checkType
-    * 检测字符串
-    * @param {string} str 
-    * @param {string} type 
-    * /需要检测的字符串
-    * /type
-    * email 邮箱
-    * phone 手机号
-    * tel 电话0373-
-    * number 数字
-    * english 英文
-    * chinese 中文
-    * lower 小写字母
-    * upper 大写字母
-    */
+
+    /**
+     * checkType
+     * 检测字符串
+     * @param {string} str 
+     * @param {string} type 
+     * /需要检测的字符串
+     * /type
+     * email 邮箱
+     * phone 手机号
+     * tel 电话0373-
+     * number 数字
+     * english 英文
+     * chinese 中文
+     * lower 小写字母
+     * upper 大写字母
+     */
     //checkType('165226226326','phone')
     //result：false
     //可以根据需要扩展
@@ -168,7 +168,7 @@ var wwm = {
     //checkPwd('12asdASAD')
     //result：3(强度等级为3)
     checkPwd: function (str) {
-        var nowLv = 0;
+        let nowLv = 0;
         if (str.length < 6) {
             return nowLv
         }
@@ -199,7 +199,6 @@ var wwm = {
     randomWord: function (count) {
         return Math.random().toString(count).substring(2);
     },
-
 
     /* 数组 */
 
@@ -235,7 +234,7 @@ var wwm = {
     maxArr: function (arr) {
         return Math.max.apply(null, arr);
     },
-    
+
     /**
      * minArr
      * 数组最小值
@@ -257,11 +256,11 @@ var wwm = {
     },
 
     /**
-     * covArr
+     * coletr
      * 数组平均值
      * @param {Array} arr 
      */
-    covArr: function (arr) {
+    coletr: function (arr) {
         return this.sumArr(arr) / arr.length;
     },
 
@@ -286,8 +285,8 @@ var wwm = {
     //getEleCount([1,2,3,4,5,66,77,22,55,22],22)
     //result：2
     getEleCount: function (obj, ele) {
-        var num = 0;
-        for (var i = 0, len = obj.length; i < len; i++) {
+        let num = 0;
+        for (let i = 0, len = obj.length; i < len; i++) {
             if (ele === obj[i]) {
                 num++;
             }
@@ -308,7 +307,7 @@ var wwm = {
     //getArrayNum([0,1,2,3,4,5,6,7,8,9],2)
     //result：[2, 3, 4, 5, 6, 7, 8, 9]
     getArrayNum: function (arr, n1, n2) {
-        var arr1 = arr.slice(n1, n2);
+        let arr1 = arr.slice(n1, n2);
         return arr1;
     },
 
@@ -318,9 +317,9 @@ var wwm = {
      * @param {Array} arr 
      */
     steamroller: function (arr) {
-        var newArr = [],
+        let newArr = [],
             _this = this;
-        for (var i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             if (Array.isArray(arr[i])) {
                 // 如果是数组，调用(递归)steamroller 将其扁平化
                 // 然后再 push 到 newArr 中
@@ -333,35 +332,44 @@ var wwm = {
         return newArr;
     },
 
+    /**
+     * getFontSize
+     * 字体屏幕适配rem
+     */
     //适配rem
     getFontSize: function () {
-        var doc = document,
+        let doc = document,
             win = window;
-        var docEl = doc.documentElement,
-            resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
-            recalc = function () {
-                var clientWidth = docEl.clientWidth;
-                if (!clientWidth) return;
-                //如果屏幕大于750（750是根据我效果图设置的，具体数值参考效果图），就设置clientWidth=750，防止font-size会超过100px
-                if (clientWidth > 750) {
-                    clientWidth = 750
-                }
-                //设置根元素font-size大小
-                docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
-            };
+        let docEl = doc.documentElement
+        let resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize'
+        let recalc = function () {
+            let clientWidth = docEl.clientWidth;
+            if (!clientWidth) return;
+            //如果屏幕大于750（750是根据我效果图设置的，具体数值参考效果图），就设置clientWidth=750，防止font-size会超过100px
+            if (clientWidth > 750) {
+                clientWidth = 750
+            }
+            //设置根元素font-size大小
+            docEl.style.fontSize = 100 * (clientWidth / 750) + 'px';
+        };
         //屏幕大小改变，或者横竖屏切换时，触发函数
         win.addEventListener(resizeEvt, recalc, false);
         //文档加载完成时，触发函数
         doc.addEventListener('DOMContentLoaded', recalc, false);
     },
-    //到某一个时间的倒计时
-    //getEndTime('2017/7/22 16:0:0')
+
+    /**
+     * getEndTime
+     * 到某一个时间的倒计时
+     * @param {Date} endTime 
+     */
+    //getEndTime('2019/6/22 16:0:0')
     //result："剩余时间6天 2小时 28 分钟20 秒"
     getEndTime: function (endTime) {
-        var startDate = new Date(); //开始时间，当前时间
-        var endDate = new Date(endTime); //结束时间，需传入时间参数
-        var t = endDate.getTime() - startDate.getTime(); //时间差的毫秒数
-        var d = 0,
+        let startDate = new Date(); //开始时间，当前时间
+        let endDate = new Date(endTime); //结束时间，需传入时间参数
+        let t = endDate.getTime() - startDate.getTime(); //时间差的毫秒数
+        let d = 0,
             h = 0,
             m = 0,
             s = 0;
@@ -376,23 +384,21 @@ var wwm = {
             return '时间错误!!!';
         }
     },
-    //随进产生颜色
+
+    /**
+     * randomColor
+     * 随机产生颜色
+     */
     randomColor: function () {
-        //randomNumber是下面定义的函数
-        //写法1
-        //return 'rgb(' + this.randomNumber(255) + ',' + this.randomNumber(255) + ',' + this.randomNumber(255) + ')';
-
-        //写法2
         return '#' + Math.random().toString(16).substring(2).substr(0, 6);
-
-        //写法3
-        //var color='#',_index=this.randomNumber(15);
-        //for(var i=0;i<6;i++){
-        //color+='0123456789abcdef'[_index];
-        //}
-        //return color;
     },
-    //随机返回一个范围的数字
+
+    /**
+     * randomNumber
+     * 随机返回一个范围的数字
+     * @param {Number} n1 
+     * @param {Number} n2 
+     */
     randomNumber: function (n1, n2) {
         //randomNumber(5,10)
         //返回5-10的随机整数，包括5，10
@@ -410,122 +416,89 @@ var wwm = {
             return Math.round(Math.random() * 255)
         }
     },
-    //设置url参数
-    //setUrlPrmt({'a':1,'b':2})
-    //result：a=1&b=2
-    setUrlPrmt: function (obj) {
-        var _rs = [];
-        for (var p in obj) {
-            if (obj[p] != null && obj[p] != '') {
-                _rs.push(p + '=' + obj[p])
-            }
-        }
-        return _rs.join('&');
-    },
-    //获取url参数
-    //getUrlPrmt('segmentfault.com/write?draftId=122000011938')
-    //result：Object{draftId: "122000011938"}
-    getUrlPrmt: function (url) {
-        url = url ? url : window.location.href;
-        var _pa = url.substring(url.indexOf('?') + 1),
-            _arrS = _pa.split('&'),
-            _rs = {};
-        for (var i = 0, _len = _arrS.length; i < _len; i++) {
-            var pos = _arrS[i].indexOf('=');
-            if (pos == -1) {
-                continue;
-            }
-            var name = _arrS[i].substring(0, pos),
-                value = window.decodeURIComponent(_arrS[i].substring(pos + 1));
-            _rs[name] = value;
-        }
-        return _rs;
-    },
 
-    //现金额大写转换函数
-    //upDigit(168752632)
-    //result："人民币壹亿陆仟捌佰柒拾伍万贰仟陆佰叁拾贰元整"
-    //upDigit(1682)
-    //result："人民币壹仟陆佰捌拾贰元整"
-    //upDigit(-1693)
-    //result："欠人民币壹仟陆佰玖拾叁元整"
-    upDigit: function (n) {
-        var fraction = ['角', '分', '厘'];
-        var digit = ['零', '壹', '贰', '叁', '肆', '伍', '陆', '柒', '捌', '玖'];
-        var unit = [
-            ['元', '万', '亿'],
-            ['', '拾', '佰', '仟']
-        ];
-        var head = n < 0 ? '欠人民币' : '人民币';
-        n = Math.abs(n);
-        var s = '';
-        for (var i = 0; i < fraction.length; i++) {
-            s += (digit[Math.floor(n * 10 * Math.pow(10, i)) % 10] + fraction[i]).replace(/零./, '');
-        }
-        s = s || '整';
-        n = Math.floor(n);
-        for (var i = 0; i < unit[0].length && n > 0; i++) {
-            var p = '';
-            for (var j = 0; j < unit[1].length && n > 0; j++) {
-                p = digit[n % 10] + unit[1][j] + p;
-                n = Math.floor(n / 10);
-            }
-            s = p.replace(/(零.)*零$/, '').replace(/^$/, '零') + unit[0][i] + s;
-            //s = p + unit[0][i] + s;
-        }
-        return head + s.replace(/(零.)*零元/, '元').replace(/(零.)+/g, '零').replace(/^整$/, '零元整');
-    },
-    //清除对象中值为空的属性
+    /**
+     * filterParams
+     * 清除对象中值为空的属性
+     * @param {]Object} obj 
+     */
     //filterParams({a:"",b:null,c:"010",d:123})
     //Object {c: "010", d: 123}
     filterParams: function (obj) {
-        var _newPar = {};
-        for (var key in obj) {
+        let _newPar = {};
+        for (let key in obj) {
             if ((obj[key] === 0 || obj[key]) && obj[key].toString().replace(/(^\s*)|(\s*$)/g, '') !== '') {
                 _newPar[key] = obj[key];
             }
         }
         return _newPar;
     },
-    //cookie
-    //设置cookie
+
+    /**
+     * setCookie
+     * 设置cookie
+     * @param {String} name 
+     * @param {Any} value 
+     * @param {Date} iDay 
+     */
     setCookie: function (name, value, iDay) {
-        var oDate = new Date();
+        let oDate = new Date();
         oDate.setDate(oDate.getDate() + iDay);
         document.cookie = name + '=' + value + ';expires=' + oDate;
     },
-    //获取cookie
+
+    /**
+     * getCookie
+     * 获取cookie
+     * @param {String} name 
+     */
     getCookie: function (name) {
-        var arr = document.cookie.split('; ');
-        for (var i = 0; i < arr.length; i++) {
-            var arr2 = arr[i].split('=');
+        let arr = document.cookie.split('; ');
+        for (let i = 0; i < arr.length; i++) {
+            let arr2 = arr[i].split('=');
             if (arr2[0] == name) {
                 return arr2[1];
             }
         }
         return '';
     },
-    //删除cookie
+
+    /**
+     * removeCookie
+     * 删除cookie
+     * @param {*} name 
+     */
     removeCookie: function (name) {
         this.setCookie(name, 1, -1);
     },
 
     /*DOM*/
 
-    //检测对象是否有哪个类名
+    /**
+     * hasClass
+     * 检测对象是否有那个类名
+     * @param {Element} obj 
+     * @param {String} classStr 
+     */
     hasClass: function (obj, classStr) {
         if (obj.className && this.trim(obj.className, 1) !== "") {
-            var arr = obj.className.split(/\s+/); //这个正则表达式是因为class可以有多个,判断是否包含
+            let arr = obj.className.split(/\s+/);
             return (arr.indexOf(classStr) == -1) ? false : true;
         } else {
             return false;
         }
 
     },
-    //添加类名
+
+    /**
+     * addClass
+     * 添加类名
+     * @param {Element} obj 
+     * @param {String} classStr 
+     */
     addClass: function (obj, classStr) {
         if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length >= 1) {
-            for (var i = 0, len = obj.length; i < len; i++) {
+            for (let i = 0, len = obj.length; i < len; i++) {
                 if (!this.hasClass(obj[i], classStr)) {
                     obj[i].className += " " + classStr;
                 }
@@ -536,49 +509,68 @@ var wwm = {
             }
         }
     },
-    //删除类名
+
+    /**
+     * removeClass
+     * 删除类名
+     * @param {Element} obj 
+     * @param {String} classStr 
+     */
     removeClass: function (obj, classStr) {
         if ((this.istype(obj, 'array') || this.istype(obj, 'elements')) && obj.length > 1) {
-            for (var i = 0, len = obj.length; i < len; i++) {
+            for (let i = 0, len = obj.length; i < len; i++) {
                 if (this.hasClass(obj[i], classStr)) {
-                    var reg = new RegExp('(\\s|^)' + classStr + '(\\s|$)');
+                    let reg = new RegExp('(\\s|^)' + classStr + '(\\s|$)');
                     obj[i].className = obj[i].className.replace(reg, '');
                 }
             }
         } else {
             if (this.hasClass(obj, classStr)) {
-                var reg = new RegExp('(\\s|^)' + classStr + '(\\s|$)');
+                let reg = new RegExp('(\\s|^)' + classStr + '(\\s|$)');
                 obj.className = obj.className.replace(reg, '');
             }
         }
     },
-    //替换类名("被替换的类名","替换的类名")
+
+    /**
+     * replaceClass
+     * 替换类名
+     * @param {Element} obj 
+     * @param {String} newName 
+     * @param {String} oldName 
+     */
     replaceClass: function (obj, newName, oldName) {
         this.removeClass(obj, oldName);
         this.addClass(obj, newName);
     },
-    //获取兄弟节点
-    //siblings(obj,'#id')
+
+    /**
+     * siblings
+     * 获取兄弟节点
+     * @param {Element} obj 
+     * @param {*} opt 
+     * /可传可不传的参数
+     */
     siblings: function (obj, opt) {
-        var a = []; //定义一个数组，用来存o的兄弟元素
-        var p = obj.previousSibling;
-        while (p) { //先取o的哥哥们 判断有没有上一个哥哥元素，如果有则往下执行 p表示previousSibling
+        let a = []; //定义一个数组，用来存o的兄弟元素
+        let p = obj.previousSibling;
+        while (p) { //先取o的哥哥们 判断有没有上一个哥哥元素，如果有则往下执行
             if (p.nodeType === 1) {
                 a.push(p);
             }
             p = p.previousSibling //最后把上一个节点赋给p
         }
         a.reverse() //把顺序反转一下 这样元素的顺序就是按先后的了
-        var n = obj.nextSibling; //再取o的弟弟
-        while (n) { //判断有没有下一个弟弟结点 n是nextSibling的意思
+        let n = obj.nextSibling; //再取o的弟弟
+        while (n) { //判断有没有下一个弟弟结点
             if (n.nodeType === 1) {
                 a.push(n);
             }
             n = n.nextSibling;
         }
         if (opt) {
-            var _opt = opt.substr(1);
-            var b = []; //定义一个数组，用于储存过滤a的数组
+            let _opt = opt.substr(1);
+            let b = []; //定义一个数组，用于储存过滤a的数组
             if (opt[0] === '.') {
                 b = a.filter(function (item) {
                     return item.className === _opt
@@ -596,96 +588,72 @@ var wwm = {
         }
         return a;
     },
+
+    /**
+     * css
+     * 设置样式
+     * @param {Element} obj 
+     * @param {Json} json 
+     */
     //设置样式
     css: function (obj, json) {
-        for (var attr in json) {
+        for (let attr in json) {
             obj.style[attr] = json[attr];
         }
     },
-    //设置HTML内容
-    html: function (obj) {
-        if (arguments.length === 1) {
-            return obj.innerHTML;
-        } else if (arguments.length === 2) {
-            obj.innerHTML = arguments[1];
-        }
-    },
-    //设置HTML内容
-    text: function (obj) {
-        if (arguments.length === 1) {
-            return obj.innerHTML;
-        } else if (arguments.length === 2) {
-            obj.innerHTML = this.filterStr(arguments[1], 'html');
-        }
-    },
-    //显示隐藏
-    show: function (obj) {
-        var blockArr = ['div', 'li', 'ul', 'ol', 'dl', 'table', 'article', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'hr', 'header', 'footer', 'details', 'summary', 'section', 'aside', '']
-        if (blockArr.indexOf(obj.tagName.toLocaleLowerCase()) === -1) {
-            obj.style.display = 'inline';
-        } else {
-            obj.style.display = 'block';
-        }
-    },
-    hide: function (obj) {
-        obj.style.display = "none";
-    },
-    /* 封装ajax函数
-     * @param {string}obj.type http连接的方式，包括POST和GET两种方式
-     * @param {string}obj.url 发送请求的url
-     * @param {boolean}obj.async 是否为异步请求，true为异步的，false为同步的
-     * @param {object}obj.data 发送的参数，格式为对象类型
-     * @param {function}obj.success ajax发送并接收成功调用的回调函数
-     * @param {function}obj.error ajax发送失败或者接收失败调用的回调函数
+
+    /**
+     * ajax
+     * ajax封装
+     * @param {Json} options 
+     * {string}type http连接的方式，包括POST和GET两种方式
+     * {string}url 发送请求的url
+     * {object}data 发送的参数，格式为对象类型
+     * {function}success ajax发送并接收成功调用的回调函数
      */
-    //  ajax({
-    //      type:'get',
-    //      url:'xxx',
-    //      data:{
-    //          id:'111'
-    //      },
-    //      success:function(res){
-    //          console.log(res)
-    //      }
-    //  })
-    ajax: function (obj) {
-        obj = obj || {};
-        obj.type = obj.type.toUpperCase() || 'POST';
-        obj.url = obj.url || '';
-        obj.async = obj.async || true;
-        obj.data = obj.data || null;
-        obj.success = obj.success || function () {};
-        obj.error = obj.error || function () {};
-        var xmlHttp = null;
-        if (XMLHttpRequest) {
-            xmlHttp = new XMLHttpRequest();
+    ajax: function (options) {
+        var xhr = null;
+        var params = formsParams(options.data);
+        //创建对象
+        if (window.XMLHttpRequest) {
+            xhr = new XMLHttpRequest()
         } else {
-            xmlHttp = new ActiveXObject('Microsoft.XMLHTTP');
+            xhr = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        var params = [];
-        for (var key in obj.data) {
-            params.push(key + '=' + obj.data[key]);
+        // 连接
+        if (options.type == "GET") {
+            xhr.open(options.type, options.url + "?" + params, options.async);
+            xhr.send(null)
+        } else if (options.type == "POST") {
+            xhr.open(options.type, options.url, options.async);
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            xhr.send(params);
         }
-        var postData = params.join('&');
-        if (obj.type.toUpperCase() === 'POST') {
-            xmlHttp.open(obj.type, obj.url, obj.async);
-            xmlHttp.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded;charset=utf-8');
-            xmlHttp.send(postData);
-        } else if (obj.type.toUpperCase() === 'GET') {
-            xmlHttp.open(obj.type, obj.url + '?' + postData, obj.async);
-            xmlHttp.send(null);
-        }
-        xmlHttp.onreadystatechange = function () {
-            if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                obj.success(xmlHttp.responseText);
-            } else {
-                obj.error(xmlHttp.responseText);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState == 4 && xhr.status == 200) {
+                options.success(xhr.responseText);
             }
-        };
+        }
+
+        function formsParams(data) {
+            var arr = [];
+            for (var prop in data) {
+                arr.push(prop + "=" + data[prop]);
+            }
+            return arr.join("&");
+        }
     },
-    //图片没加载出来时用一张图片代替
-    aftLoadImg: function (obj, url, errorUrl, cb) {
-        var oImg = new Image(),
+
+    /**
+     * loadImg
+     * 图片加载中
+     * @param {Element} obj 
+     * @param {Url} url 
+     * @param {Url} errorUrl 
+     * @param {function} cb 
+     */
+    loadImg: function (obj, url, errorUrl, cb) {
+        let oImg = new Image(),
             _this = this;
         oImg.src = url;
         oImg.onload = function () {
@@ -701,101 +669,16 @@ var wwm = {
             }
         }
     },
-    //图片滚动懒加载
-    //@className {string} 要遍历图片的类名
-    //@num {number} 距离多少的时候开始加载 默认 0
-    //比如，一张图片距离文档顶部3000，num参数设置200，那么在页面滚动到2800的时候，图片加载。不传num参数就滚动，num默认是0，页面滚动到3000就加载
-    //html代码
-    //<p><img data-src="lawyerOtherImg.jpg" class="load-img" width='528' height='304' /></p>
-    //<p><img data-src="lawyerOtherImg.jpg" class="load-img" width='528' height='304' /></p>
-    //<p><img data-src="lawyerOtherImg.jpg" class="load-img" width='528' height='304' /></p>....
-    //data-src储存src的数据，到需要加载的时候把data-src的值赋值给src属性，图片就会加载。
-    //详细可以查看testLoadImg.html
 
-    //window.onload = function() {
-    //  loadImg('load-img',100);
-    //  window.onscroll = function() {
-    //      loadImg('load-img',100);
-    //      }
-    //}
-    loadImg: function (className, num, errorUrl) {
-        var _className = className || 'ec-load-img',
-            _num = num || 0,
-            _this = this,
-            _errorUrl = errorUrl || null;
-        var oImgLoad = document.getElementsByClassName(_className);
-        for (var i = 0, len = oImgLoad.length; i < len; i++) {
-            if (document.documentElement.clientHeight + document.documentElement.scrollTop > oImgLoad[i].offsetTop - _num && !oImgLoad[i].isLoad) {
-                //记录图片是否已经加载
-                oImgLoad[i].isLoad = true;
-                //设置过渡，当图片下来的时候有一个图片透明度变化
-                oImgLoad[i].style.cssText = "transition: ''; opacity: 0;"
-                if (oImgLoad[i].dataset) {
-                    this.aftLoadImg(oImgLoad[i], oImgLoad[i].dataset.src, _errorUrl, function (o) {
-                        setTimeout(function () {
-                            if (o.isLoad) {
-                                _this.removeClass(o, _className);
-                                o.style.cssText = "";
-                            }
-                        }, 1000)
-                    });
-                } else {
-                    this.aftLoadImg(oImgLoad[i], oImgLoad[i].getAttribute("data-src"), _errorUrl, function (o) {
-                        setTimeout(function () {
-                            if (o.isLoad) {
-                                _this.removeClass(o, _className);
-                                o.style.cssText = "";
-                            }
-                        }, 1000)
-                    });
-                }
-                (function (i) {
-                    setTimeout(function () {
-                        oImgLoad[i].style.cssText = "transition:all 1s; opacity: 1;";
-                    }, 16)
-                })(i);
-            }
-        }
-    },
-    //创建正则字符
-    createKeyExp: function (strArr) {
-        var str = "";
-        for (var i = 0; i < strArr.length; i++) {
-            if (i != strArr.length - 1) {
-                str = str + strArr[i] + "|";
-            } else {
-                str = str + strArr[i];
-            }
-        }
-        return "(" + str + ")";
-    },
-    //关键字加标签（多个关键词用空格隔开）
-    //findKey('守侯我oaks接到了来自下次你离开快乐吉祥留在开城侯','守侯 开','i')
-    //"<i>守侯</i>我oaks接到了来自下次你离<i>开</i>快乐吉祥留在<i>开</i>城侯"
-    findKey: function (str, key, el) {
-        var arr = null,
-            regStr = null,
-            content = null,
-            Reg = null,
-            _el = el || 'span';
-        arr = key.split(/\s+/);
-        //alert(regStr); //    如：(前端|过来)
-        regStr = this.createKeyExp(arr);
-        content = str;
-        //alert(Reg);//        /如：(前端|过来)/g
-        Reg = new RegExp(regStr, "g");
-        //过滤html标签 替换标签，往关键字前后加上标签
-        content = content.replace(/<\/?[^>]*>/g, '')
-        return content.replace(Reg, "<" + _el + ">$1</" + _el + ">");
-    },
-    //数据类型判断
-    //istype([],'array')
-    //true
-    //istype([])
-    //'[object Array]'
+    /**
+     * istype
+     * 数据类型判断
+     * @param {Any} o 
+     * @param {Type} type 
+     */
     istype: function (o, type) {
         if (type) {
-            var _type = type.toLowerCase();
+            let _type = type.toLowerCase();
         }
         switch (_type) {
             case 'string':
@@ -823,6 +706,12 @@ var wwm = {
         }
     },
 
+    /**
+     * browserInfo
+     * 手机类型判断
+     * @param {Type} type 
+     * /type android|iphone|ipad|weixin|
+     */
     //手机类型判断
     browserInfo: function (type) {
         switch (type) {
@@ -838,71 +727,43 @@ var wwm = {
                 return navigator.userAgent.toLowerCase()
         }
     },
-    //函数节流
-    // var count=0;
-    // function fn1(){
-    //     count++;
-    //     console.log(count)
-    // }
-    // //100ms内连续触发的调用，后一个调用会把前一个调用的等待处理掉，但每隔200ms至少执行一次
-    // document.onmousemove=delayFn(fn1,100,200)
-    delayFn: function (fn, delay, mustDelay) {
+
+    /**
+     * throttle
+     * 函数节流
+     * @param {function} fn 
+     * @param {Time} wait 
+     */
+    throttle: function (fn, wait) {
         var timer = null;
-        var t_start;
         return function () {
-            var context = this,
-                args = arguments,
-                t_cur = +new Date();
-            //先清理上一次的调用触发（上一次调用触发事件不执行）
-            clearTimeout(timer);
-            //如果不存触发时间，那么当前的时间就是触发时间
-            if (!t_start) {
-                t_start = t_cur;
-            }
-            //如果当前时间-触发时间大于最大的间隔时间（mustDelay），触发一次函数运行函数
-            if (t_cur - t_start >= mustDelay) {
-                fn.apply(context, args);
-                t_start = t_cur;
-            }
-            //否则延迟执行
-            else {
-                timer = setTimeout(function () {
+            var context = this;
+            var args = arguments;
+            if (!timer) {
+                timer = setInterval(function () {
                     fn.apply(context, args);
-                }, delay);
-            }
-        };
-    },
-    //原生JavaScript加入收藏夹
-    AddFavorite: function (sURL, sTitle) {
-        try {
-            window.external.addFavorite(sURL, sTitle)
-        } catch (e) {
-            try {
-                window.sidebar.addPanel(sTitle, sURL, "")
-            } catch (e) {
-                alert("加入收藏失败，请使用Ctrl+D进行添加")
+                    timer = null;
+                }, wait)
             }
         }
     },
-    // 原生 JavaScript 实现字符串长度截取
-    Cutstr: function (str, len) {
-        var temp;
-        var icount = 0;
-        var patrn = /[^\x00-\xff]/;
-        var strre = "";
-        for (var i = 0; i < str.length; i++) {
-            if (icount < len - 1) {
-                temp = str.substr(i, 1);
-                if (patrn.exec(temp) == null) {
-                    icount = icount + 1
-                } else {
-                    icount = icount + 2
-                }
-                strre += temp
-            } else {
-                break
-            }
+
+    /**
+     * debounce
+     * 函数防抖
+     * @param {function} func 
+     * @param {Time} wait 
+     */
+    debounce: function (fn, wait) {
+        let timeout;
+        return function () {
+            let context = this;
+            let args = arguments;
+            if (timeout) clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                fn.apply(context, args)
+            }, wait);
         }
-        return strre + "..."
     }
+
 }
