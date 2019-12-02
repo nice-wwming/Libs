@@ -1,7 +1,5 @@
 let wwm = {
 
-    /* 字符串 */
-
     /**
      * trim
      * 字符串去除空格
@@ -199,8 +197,6 @@ let wwm = {
     randomWord: function (count) {
         return Math.random().toString(count).substring(2);
     },
-
-    /* 数组 */
 
     /**
      * removeRepeatArray
@@ -471,8 +467,6 @@ let wwm = {
     removeCookie: function (name) {
         this.setCookie(name, 1, -1);
     },
-
-    /*DOM*/
 
     /**
      * hasClass
