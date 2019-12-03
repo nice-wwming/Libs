@@ -17,8 +17,6 @@
 * checkType(str , type) 字符串检测|验证(手机号，大小写，英文，中文)
 * checkPwd(str) 检测密码强度
 * randomWord(count) 限定位数生成随机码
-* throttle(fn, wait) 函数节流
-* debounce(fn, wait) 函数防抖
 
 **数组方法**
 
@@ -46,6 +44,8 @@
 * ajax(options) ajax封装
 * istype(o, type) 数据类型判断
 * browserInfo(type) 手机类型判断
+* throttle(fn, wait) 函数节流
+* debounce(fn, wait) 函数防抖
 
 **DOM操作**
 
