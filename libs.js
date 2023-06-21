@@ -724,7 +724,7 @@ let wwm = {
 
     /**
      * throttle
-     * 函数节流
+     * 节流函数
      * @param {function} fn 
      * @param {Time} wait 
      */
@@ -744,7 +744,7 @@ let wwm = {
 
     /**
      * debounce
-     * 函数防抖
+     * 防抖函数
      * @param {function} func 
      * @param {Time} wait 
      */
